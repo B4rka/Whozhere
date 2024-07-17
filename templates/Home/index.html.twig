@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} WhozHere Wild {% endblock %}
+
+{% block body %}
+    <main class="index-main">
+        <section class="barcode-area">
+            <div class="entry-scan">
+                <label for="entry">Codebarre élève:</label>
+                <input id="entry" type="text">
+            </div>
+            <div class="exit-scan">
+                <label for="exit">Codebarre élève:</label>
+                <input id="exit" type="text">
+            </div>
+        </section>
+        <div class="student-area">
+            <section class="entry-side student-zone">
+                <h2>Entrées :</h2>
+            </section>
+            <section class="exit-side student-zone">
+                <h2>Sorties :</h2>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const entry = document.getElementById('entry');
+        const exit = document.getElementById('exit');
+
+        entry.addEventListener("change", function (event) {
+            window.location.href = `http://localhost:8000/student/enter/${event.target.value}`;
+            entry.value = '';
+        })
+
+        exit.addEventListener("change", function (event) {
+            window.location.href = `http://localhost:8000/student/exit/${event.target.value}`;
+            exit.value= '';
+        })
+    </script>
+{% endblock %}

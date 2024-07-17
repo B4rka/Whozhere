@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} WhozHere Wild {% endblock %}
+
+{% block body %}
+    <main class="exits-main">
+        <section class="barcode-area">
+            <div class="exits-exit-scan">
+                <label for="exit">Codebarre élève:</label>
+                <input id="exit" type="text">
+            </div>
+        </section>
+        <div class="exits-student-area">
+            <section class="exits-exit-side exit-side student-zone">
+                <h2>Sorties :</h2>
+            </section>
+        </div>
+    </main>
+{% endblock %}

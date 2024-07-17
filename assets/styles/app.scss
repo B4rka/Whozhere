@@ -1,0 +1,25 @@
+@import '../../vendor/twbs/bootstrap/scss/bootstrap';
+@import "index";
+@import "classes";
+@import "internat";
+
+:root {
+    --background-color: white;
+}
+
+body {
+    background-color: darkgray;
+}
+
+.website-entry-title {
+    background-color: var(--background-color);
+    text-align: center;
+}
+
+nav {
+    background-color: var(--background-color);
+    a {
+        margin-inline: 1rem;
+        color: black;
+    }
+}

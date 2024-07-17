@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} WhozHere Wild {% endblock %}
+
+{% block body %}
+    <main class="internat-main">
+        <section class="student-card-container">
+            {% for student in students %}
+                {% if student.isIn %}
+                    <article class="student-card student-in boarder-card">
+                {% else %}
+                    <article class="student-card student-out boarder-card">
+                {% endif %}
+                        <p>{{ ux_icon('streamline:user-profile-focus-solid') }}</p>
+                        <div class="student-info">
+                            <h2 class="student-card-title"> {{ student.firstname }} {{ student.lastname }} -
+                                {{ student.classe.name }}</h2>
+                            <p>{{ student.regime.name }}</p>
+                        </div>
+                    </article>
+            {% endfor %}
+        </section>
+    </main>
+
+    <script>
+        const cards = document.querySelectorAll('article');
+
+
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].addEventListener("dblclick", function () {
+                if (cards[i].classList.contains('student-in')) {
+                    cards[i].classList.remove('student-in');
+                    cards[i].classList.add('student-out');
+                } else {
+                    cards[i].classList.remove('student-out');
+                    cards[i].classList.add('student-in');
+                }
+            })
+        }
+    </script>
+{% endblock %}

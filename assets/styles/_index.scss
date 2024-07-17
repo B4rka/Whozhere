@@ -1,0 +1,40 @@
+.index-main {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.barcode-area {
+  display: flex;
+  background-color: var(--background-color);
+  height: 75px;
+  width: 99%;
+  margin-bottom: 0.5rem;
+  align-self: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.student-area {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.student-zone {
+  background-color: var(--background-color);
+  width: 49%;
+  text-align: center;
+  height: 1080px;
+  h2 {
+    border-bottom: black solid 2px;
+  }
+  border: black solid 2px;
+}
+
+.entry-side {
+
+}
+
+.exit-side {
+
+}
