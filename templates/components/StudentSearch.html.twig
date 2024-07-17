@@ -1,0 +1,29 @@
+<div{{ attributes }}>
+    <div class="mb-3">
+        <label class="form-label" for="search">
+            Prénom ou nom :
+        </label>
+        <input type="search"
+               id="search"
+               class="form-control"
+               data-model="query">
+    </div>
+    <section class="student-card-container">
+        {% if this.students is not null %}
+        {% for student in this.students %}
+        {% if student.isIn %}
+        <article class="student-card student-in">
+            {% else %}
+            <article class="student-card student-out">
+                {% endif %}
+                <p>{{ ux_icon('streamline:user-profile-focus-solid') }}</p>
+                <div class="student-info">
+                    <h2 class="student-card-title"> {{ student.firstname }} {{ student.lastname }} -
+                        {{ student.classe.name }}</h2>
+                    <p>{{ student.regime.name }}</p>
+                </div>
+            </article>
+            {% endfor %}
+            {% endif %}
+    </section>
+</div>

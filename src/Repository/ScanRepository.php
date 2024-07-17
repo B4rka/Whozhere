@@ -2,43 +2,42 @@
 
 namespace App\Repository;
 
-use App\Entity\Students;
+use App\Entity\Scan;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Students>
+ * @extends ServiceEntityRepository<Scan>
  */
-class StudentsRepository extends ServiceEntityRepository
+class ScanRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Students::class);
+        parent::__construct($registry, Scan::class);
     }
 
-    public function findBoarders(string $regime)
+    public function findExits()
     {
         return $this->createQueryBuilder('s')
-            ->join('s.regime', 'regime')
-            ->andWhere('regime.name LIKE :searchTerm')
-            ->setParameter('searchTerm', $regime.'%')
-            ->addOrderBy('s.lastname', 'ASC')
+            ->join('s.student', 'students')
+            ->andWhere('students.isIn = FALSE')
+            ->addOrderBy('s.scannedAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-    public function findLike(string $query)
+    public function findEntries()
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.firstname LIKE :searchTerm OR s.lastname LIKE :searchTerm')
-            ->setParameter('searchTerm', $query.'%')
-            ->addOrderBy('s.lastname', 'ASC')
+            ->join('s.student', 'students')
+            ->andWhere('students.isIn = TRUE')
+            ->addOrderBy('s.scannedAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
     //    /**
-    //     * @return Students[] Returns an array of Students objects
+    //     * @return Scan[] Returns an array of Scan objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -52,7 +51,7 @@ class StudentsRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Students
+    //    public function findOneBySomeField($value): ?Scan
     //    {
     //        return $this->createQueryBuilder('s')
     //            ->andWhere('s.exampleField = :val')

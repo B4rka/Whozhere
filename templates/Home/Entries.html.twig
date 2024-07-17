@@ -13,7 +13,26 @@
         <div class="entries-student-area">
             <section class="entries-entry-side entry-side student-zone">
                 <h2>Entrées :</h2>
+                {% for scan in entryList %}
+                    <article class="entry-card student-in">
+                        <p>{{ ux_icon('streamline:user-profile-focus-solid') }}</p>
+                        <div class="student-info">
+                            <h2 class="student-card-title"> {{ scan.student.firstname }} {{ scan.student.lastname }} -
+                                {{ scan.student.classe.name }}</h2>
+                            <p>{{ scan.student.regime.name }}</p>
+                        </div>
+                    </article>
+                {% endfor %}
             </section>
         </div>
     </main>
+
+    <script>
+        const entryInput = document.getElementById('entry');
+
+        entryInput.addEventListener("change", function (event) {
+            window.location.replace(`http://localhost:8000/student/enter/${event.target.value}`);
+            entryInput.value = '';
+        })
+    </script>
 {% endblock %}

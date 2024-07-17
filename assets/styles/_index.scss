@@ -15,6 +15,26 @@
   align-items: center;
 }
 
+.entry-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  svg {
+    height: 75px;
+  }
+}
+
+.exit-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  svg {
+    height: 75px;
+  }
+}
+
 .student-area {
   display: flex;
   justify-content: space-evenly;
@@ -29,10 +49,6 @@
     border-bottom: black solid 2px;
   }
   border: black solid 2px;
-}
-
-.entry-side {
-
 }
 
 .exit-side {

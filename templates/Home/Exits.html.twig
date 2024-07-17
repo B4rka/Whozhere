@@ -13,7 +13,26 @@
         <div class="exits-student-area">
             <section class="exits-exit-side exit-side student-zone">
                 <h2>Sorties :</h2>
+                {% for scan in exitList %}
+                    <article class="exit-card student-out">
+                        <p>{{ ux_icon('streamline:user-profile-focus-solid') }}</p>
+                        <div class="student-info">
+                            <h2 class="student-card-title"> {{ scan.student.firstname }} {{ scan.student.lastname }} -
+                                {{ scan.student.classe.name }}</h2>
+                            <p>{{ scan.student.regime.name }}</p>
+                        </div>
+                    </article>
+                {% endfor %}
             </section>
         </div>
     </main>
+
+    <script>
+        const exitInput = document.getElementById('exit');
+
+        exitInput.addEventListener("change", function (event) {
+            window.location.replace(`http://localhost:8000/student/exit/${event.target.value}`);
+            exitInput.value= '';
+        })
+    </script>
 {% endblock %}

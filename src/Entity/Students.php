@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StudentsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StudentsRepository::class)]
@@ -27,6 +29,17 @@ class Students
 
     #[ORM\ManyToOne(inversedBy: 'students')]
     private ?Regime $regime = null;
+
+    /**
+     * @var Collection<int, Scan>
+     */
+    #[ORM\OneToMany(targetEntity: Scan::class, mappedBy: 'student', orphanRemoval: true)]
+    private Collection $scans;
+
+    public function __construct()
+    {
+        $this->scans = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +102,36 @@ class Students
     public function setRegime(?Regime $regime): static
     {
         $this->regime = $regime;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Scan>
+     */
+    public function getScans(): Collection
+    {
+        return $this->scans;
+    }
+
+    public function addScan(Scan $scan): static
+    {
+        if (!$this->scans->contains($scan)) {
+            $this->scans->add($scan);
+            $scan->setStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScan(Scan $scan): static
+    {
+        if ($this->scans->removeElement($scan)) {
+            // set the owning side to null (unless already changed)
+            if ($scan->getStudent() === $this) {
+                $scan->setStudent(null);
+            }
+        }
 
         return $this;
     }
